@@ -1,22 +1,22 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.views import View
-from .forms import ItemCodeForm
+from .forms import ItemForm
 from barcode.writer import ImageWriter
+from .models import Item
 import barcode
-from .models import ItemCode
 import os,sys
 # Create your views here.
 
 class Home(View):
     def get(self, request, *args, **kwargs):
-        post = ItemCode.objects.all()
+        post = Item.objects.all()
         context = {
             'post': post,
         }
         return render(request, 'post_list.html', context)
 
 class ItemCreateView(View):
-    form_class = ItemCodeForm
+    form_class = ItemForm
     initial = {'key': 'value'}
     template_name = 'item-create.html'
 
@@ -33,10 +33,14 @@ class ItemCreateView(View):
             ean = barcode.get('Code39', bcode, writer=ImageWriter())
             filename = ean.save('live-static/media-root/'+bcode)
             post.barcode = bcode + '.png'
+            quantity = post.quantity
+            unit_cost = post.unit_cost
+            total_value = quantity * unit_cost
+            post.total = total_value
             post.save()
             # return redirect('blog:post-detail', pk=post.pk)
         else:
-            form = ItemCodeForm()
+            form = ItemForm()
         context = {
             'form': form
         }

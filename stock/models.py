@@ -20,13 +20,6 @@ STATUS_CHOICES = (
     ('widow', 'widow'),
 )
 
-class ItemCode(models.Model):
-    number                  = models.CharField(max_length=255)
-    barcode                 = models.ImageField(upload_to='media')
-
-    def __str__(self):
-        return '{}'.format(self.number)
-
 class Brand(models.Model):
     user                    = models.ForeignKey(User, on_delete=models.CASCADE)
     name                    = models.CharField(max_length=255)
@@ -35,7 +28,7 @@ class Brand(models.Model):
     slug                    = models.SlugField(null=True, blank=True)
 
     def __str__(self):
-        return '{}'.format(self.title)
+        return '{}'.format(self.name)
 
     # @property
     # def slug_title(self):
@@ -49,18 +42,19 @@ class Category(models.Model):
     slug                    = models.SlugField(null=True, blank=True)
 
     def __str__(self):
-        return '{}'.format(self.title)
+        return '{}'.format(self.name)
 
 class Item(models.Model):
     user                    = models.ForeignKey(User, on_delete=models.CASCADE)
     brand                   = models.ForeignKey('Brand', on_delete=models.CASCADE)
     category                = models.ForeignKey('Category', on_delete=models.CASCADE)
+    barcode                 = models.ImageField(upload_to='media')
     number                  = models.CharField(max_length=255)
     name                    = models.CharField(max_length=255)
-    description             = models.CharField(max_length=500)
-    quantity                = models.CharField(max_length=255)
-    unit_cost               = models.CharField(max_length=255)
-    total                   = models.CharField(max_length=255)
+    description             = models.TextField()
+    quantity                = models.IntegerField()
+    unit_cost               = models.IntegerField()
+    total                   = models.IntegerField()
     date_created            = models.DateTimeField(auto_now_add=True)
     date_modified           = models.DateTimeField(auto_now=True)
     slug                    = models.SlugField(null=True, blank=True)

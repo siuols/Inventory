@@ -1,10 +1,16 @@
 from django import forms
-from .models import ItemCode
+from .models import Item
 
-class ItemCodeForm(forms.ModelForm):
+
+class ItemForm(forms.ModelForm):
     class Meta:
-        model = ItemCode
+        model = Item
         fields = [
-            'number',
-            # 'barcode',
+	        'brand',
+			'category',
+			'number',                 
+			'name',                   
+			'description',             
+			'quantity',               
+			'unit_cost',   
         ]
