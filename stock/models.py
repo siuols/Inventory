@@ -106,7 +106,7 @@ class Offiice(models.Model):
     def __str__(self):
         return '{}'.format(self.number)
 
-class Released(models.Model):
+class Release(models.Model):
     user                    = models.ForeignKey(User, on_delete=models.CASCADE)
     id_number               = models.ForeignKey('Customer', on_delete=models.CASCADE)
     number                  = models.ForeignKey('Item', on_delete=models.CASCADE)
