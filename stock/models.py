@@ -20,6 +20,12 @@ STATUS_CHOICES = (
     ('widow', 'widow'),
 )
 
+class ItemCode(models.Model):
+    number                  = models.CharField(max_length=255)
+    barcode                 = models.ImageField()
+
+    def __str__(self):
+        return '{}'.format(self.number)
 
 class Brand(models.Model):
     user                    = models.ForeignKey(User, on_delete=models.CASCADE)
