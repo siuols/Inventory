@@ -22,7 +22,7 @@ STATUS_CHOICES = (
 
 class ItemCode(models.Model):
     number                  = models.CharField(max_length=255)
-    barcode                 = models.ImageField()
+    barcode                 = models.ImageField(upload_to='media')
 
     def __str__(self):
         return '{}'.format(self.number)
