@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.views import View
-from .forms import ItemForm
+from .forms import ItemForm,RegistrationForm
 from barcode.writer import ImageWriter
 from .models import Item
 import barcode
@@ -43,5 +43,38 @@ class ItemCreateView(View):
             form = ItemForm()
         context = {
             'form': form
+        }
+        return render(request, self.template_name, context)
+
+class RegisterFormView(View):
+    form_class = RegistrationForm
+    initial = {'key': 'value'}
+    template_name = 'registration/register.html'
+
+    def get(self, request, *args, **kwargs):
+        user_form = self.form_class(initial=self.initial)
+        profile_form = self.second_form_class(initial=self.initial)
+        context = {
+            'user_form': user_form,
+        }
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        user_form = self.form_class(request.POST)
+        profile_form = self.second_form_class(request.POST, request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            username = user_form.cleaned_data.get('username')
+            raw_password = user_form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            profile_form = profile_form.save(commit=False)
+            profile_form.user = request.user
+            profile_form.save()
+            # return redirect('blog:post-list')
+        else:
+            form = RegistrationForm()
+        context = {
+            'user_form': user_form,
         }
         return render(request, self.template_name, context)
