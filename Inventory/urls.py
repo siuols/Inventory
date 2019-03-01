@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from stock.views import ItemCreateView,Home
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+	path('', Home.as_view(), name='post-list'),
+    path('post/new/', ItemCreateView.as_view(), name='post-create'),
 ]
+
