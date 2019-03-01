@@ -7,8 +7,6 @@ from .models import ItemCode
 import os,sys
 # Create your views here.
 
-
-
 class Home(View):
     def get(self, request, *args, **kwargs):
         post = ItemCode.objects.all()
@@ -32,12 +30,8 @@ class ItemCreateView(View):
             post = form.save(commit=False)
             post.user = request.user
             bcode = post.number
-
-            
-
             ean = barcode.get('Code39', bcode, writer=ImageWriter())
-            filename = ean.save('media/media/'+bcode)
-
+            filename = ean.save('live-static/media-root/'+bcode)
             post.barcode = bcode + '.png'
             post.save()
             # return redirect('blog:post-detail', pk=post.pk)

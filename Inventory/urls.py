@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from stock.views import ItemCreateView,Home
 
 urlpatterns = [
@@ -23,3 +25,5 @@ urlpatterns = [
     path('post/new/', ItemCreateView.as_view(), name='post-create'),
 ]
 
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

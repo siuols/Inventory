@@ -1,0 +1,42 @@
+.float-right{
+  text-align: right;
+}
+
+.center{
+  text-align: center;
+}
+
+.parallax-caption {
+  z-index: 10;
+  color: white;
+  margin-top: 200px;
+}
+
+.parallax1 {
+  /* The image used */
+  background-image: url(http://ndmc.edu.ph/sites/default/files/styles/1366x768/public/2.jpg?itok=Ok0fjtkU);
+
+  /* Set a specific height */
+  min-height: 600px; 
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: -39.5px;
+}
+
+.parallax {
+  /* The image used */
+  background-image: url(http://ndmc.edu.ph/sites/default/files/styles/1366x768/public/1.jpg?itok=08Ax7mYc);
+
+  /* Set a specific height */
+  min-height: 600px; 
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
