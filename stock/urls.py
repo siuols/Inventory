@@ -1,12 +1,34 @@
 from django.urls import path
 
-from .views import ItemCreateView,Home
+from .views import (
+        BrandCreateView,
+        CategoryCreateView,
+        CourseCreateView,
+        CustomerCreateView,
+        CustomerList,
+        CustomerDetailView,
+        ItemCreateView,
+        Home,
+        OfficeCreateView,
+        ItemDetailView
+    )
+
+
+
 
 app_name='stock'
 
 urlpatterns = [
     path('', Home.as_view(), name='post-list'),
+    path('customer/', CustomerList.as_view(), name='customer-list'),
     path('create/', ItemCreateView.as_view(), name='post-create'),
+    path('create-brand/', BrandCreateView.as_view(), name='brand-create'),
+    path('create-category/', CategoryCreateView.as_view(), name='category-create'),
+    path('create-office/', OfficeCreateView.as_view(), name='office-create'),
+    path('create-course/', CourseCreateView.as_view(), name='course-create'),
+    path('create-customer/', CustomerCreateView.as_view(), name='course-customer'),
+    path('item/<str:number>', ItemDetailView.as_view(), name='item-detail'),
+    path('customer/<str:id_number>', CustomerDetailView.as_view(), name='customer-detail'),
     # path('course', Courselist, name='course-list'),e
     # path('choice', choice_list, name='choice-list'),
     # path('personal-information', personal_information_list, name='personal-information-list'),

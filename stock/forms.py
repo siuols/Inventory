@@ -1,5 +1,5 @@
 from django import forms
-from .models import Brand,Category,Course,Customer,Release,Item
+from .models import Brand,Category,Course,Customer,Release,Office,Item
 from django.contrib.auth import get_user_model
 from django.core.validators import RegexValidator
 from django.utils.translation import ugettext, ugettext_lazy as _
@@ -19,28 +19,35 @@ class ItemForm(forms.ModelForm):
 			'unit_cost',   
         ]
 
-class BrandForm(forms.Form):
+class BrandForm(forms.ModelForm):
 	class Meta:
 		model = Brand
 		fields = [
 			'name'
 		]
 
-class CategoryForm(forms.Form):
+class CategoryForm(forms.ModelForm):
 	class Meta:
 		model = Category
 		fields = [
 			'name'
 		]
 
-class CourseForm(forms.Form):
+class OfficeForm(forms.ModelForm):
+    class Meta:
+        model = Office
+        fields = [
+            'name'
+        ]
+
+class CourseForm(forms.ModelForm):
     class Meta:
         model = Course
         fields = [
             'code'
         ]
 
-class CustomerForm(forms.Form):
+class CustomerForm(forms.ModelForm):
 	class Meta:
 		model = Customer
 		fields = [
@@ -53,7 +60,7 @@ class CustomerForm(forms.Form):
 			'status'
 		]
 
-class ReleaseForm(forms.Form):
+class ReleaseForm(forms.ModelForm):
 	class Meta:
 		model = Release
 		fields = [

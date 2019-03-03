@@ -26,7 +26,6 @@
 
 
     <!-- Sidebar -->
-
     <div id="content-wrapper">
       <div class="alignment-scanner" id="scanner">
         <div id="barcode">
@@ -62,7 +61,7 @@
                   {% if post %}
                     {% for post in post %}
                       <tr>
-                        <td>{{ post.number }}</td>
+                        <td><a href="{% url 'stock:item-detail' post.number %}">{{ post.number }}</a></td>
                         <td>{{ post.name }}</td>
                         <td>{{ post.description }}</td>
                         <td>{{ post.brand }}</td>

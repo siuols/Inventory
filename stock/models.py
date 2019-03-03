@@ -11,13 +11,14 @@ YEAR_CHOICES = (
     ('2nd', '2nd'),
     ('3rd', '3rd'),
     ('4th', '4th'),
+    ('5th', '5th'),
 )
 
 STATUS_CHOICES = (
-    ('single', 'single'),
-    ('married', 'married'),
-    ('separeted', 'separeted'),
-    ('widow', 'widow'),
+    ('Single', 'Single'),
+    ('Married', 'Married'),
+    ('Separeted', 'Separeted'),
+    ('Widow', 'Widow'),
 )
 
 class Brand(models.Model):
@@ -96,7 +97,7 @@ class Customer(models.Model):
     def __str__(self):
         return '{}'.format(self.id_number)
 
-class Offiice(models.Model):
+class Office(models.Model):
     user                    = models.ForeignKey(User, on_delete=models.CASCADE)
     name                    = models.CharField(max_length=255)
     date_created            = models.DateTimeField(auto_now_add=True)
@@ -112,7 +113,7 @@ class Release(models.Model):
     number                  = models.ForeignKey('Item', on_delete=models.CASCADE)
     quantity                = models.IntegerField()
     total                   = models.IntegerField()
-    office                  = models.ForeignKey('Offiice', on_delete=models.CASCADE)
+    office                  = models.ForeignKey('Office', on_delete=models.CASCADE)
     date_created            = models.DateTimeField(auto_now_add=True)
     date_modified           = models.DateTimeField(auto_now=True)
 

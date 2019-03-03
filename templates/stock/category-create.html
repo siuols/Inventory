@@ -2,13 +2,13 @@
 {% block content %}
   <div class="container">
     <div class="card card-register mx-auto mt-5">
-      <div class="card-header">Add Course</div>
+      <div class="card-header">Add Category</div>
       <div class="card-body">
         <form method="POST" class="post-form" role="form">{% csrf_token %}      
           <div class="form-group">
             <div class="form-label-group">
-              <input type="text" name="code" maxlength="255" id="id_code" class="form-control" placeholder="Course" required="required">
-              <label for="id_code">Course</label>
+              <input type="text" name="name" maxlength="255" id="id_name" class="form-control" placeholder="Brand" required="required">
+              <label for="id_name">Category</label>
             </div>
           </div>
           <button type="submit" class="btn btn-primary btn-block">Save</button>
