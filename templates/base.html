@@ -1,11 +1,14 @@
-{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang=en>
-  <head>
-    <title>{% block head_title %}Blog{% endblock head_title %}</title>
-  </head>
-
-  <body>
-    {% block content %}{% endblock content %}
-  </body>
+<head>
+	<title>{% block head_title %}NDMC Inventory System{% endblock head_title %}</title>
+	{% include 'snippets/css.html' %}
+</head>
+	<header>
+	</header>
+	<body>
+		{% block content %}{% endblock content %}
+	</body>
+	{% include 'snippets/js.html' %}
 </html>

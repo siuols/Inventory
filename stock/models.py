@@ -82,12 +82,12 @@ class Customer(models.Model):
     year                    = models.CharField(
                                                 max_length=9,
                                                 choices=YEAR_CHOICES,
-                                                default='published'
+                                                default='1st'
                                             )
     status                  = models.CharField(
                                                 max_length=9,
                                                 choices=STATUS_CHOICES,
-                                                default='published'
+                                                default='single'
                                             )
     date_created            = models.DateTimeField(auto_now_add=True)
     date_modified           = models.DateTimeField(auto_now=True)
@@ -110,7 +110,8 @@ class Release(models.Model):
     user                    = models.ForeignKey(User, on_delete=models.CASCADE)
     id_number               = models.ForeignKey('Customer', on_delete=models.CASCADE)
     number                  = models.ForeignKey('Item', on_delete=models.CASCADE)
-    quantity                = models.CharField(max_length=255)
+    quantity                = models.IntegerField()
+    total                   = models.IntegerField()
     office                  = models.ForeignKey('Offiice', on_delete=models.CASCADE)
     date_created            = models.DateTimeField(auto_now_add=True)
     date_modified           = models.DateTimeField(auto_now=True)

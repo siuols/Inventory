@@ -1,8 +1,0 @@
- 
-{% load staticfiles %}
- {% if post %}
-    {% for post in post %}
-        <img src="{{ MEDIA_URL }}{{ post.barcode.url }}" alt="Avatar">
-        <p>{{ post.number }}</p>
-	{% endfor %}
-{% endif %}

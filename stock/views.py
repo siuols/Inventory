@@ -13,12 +13,54 @@ class Home(View):
         context = {
             'post': post,
         }
-        return render(request, 'post_list.html', context)
+        return render(request, 'stock/stock_list.html', context)
+
+class Brandlist(View):
+    def get(self, request, *args, **kwargs):
+        brand = Brand.objects.all()
+        context = {
+            'brand': brand,
+        }
+        return render(request, 'stock/brand_list.html', context)
+
+class Categorylist(View):
+    def get(self, request, *args, **kwargs):
+        category = Category.objects.all()
+        context = {
+            'category': category,
+        }
+        return render(request, 'stock/category_list.html', context)
+
+class Courselist(View):
+    def get(self, request, *args, **kwargs):
+        course = Course.objects.all()
+        context = {
+            'course': course,
+        }
+        return render(request, 'stock/course_list.html', context)
+
+class Customerlist(View):
+    def get(self, request, *args, **kwargs):
+        customer = Customer.objects.all()
+        context = {
+            'customer': customer,
+        }
+        return render(request, 'customer_list.html', context)
+
+
+class Releaselist(View):
+    def get(self, request, *args, **kwargs):
+        release = Release.objects.all()
+        context = {
+            'release':release,
+        }
+        return render(request, 'stock/release_list.html', context)
+
 
 class ItemCreateView(View):
     form_class = ItemForm
     initial = {'key': 'value'}
-    template_name = 'item-create.html'
+    template_name = 'stock/item-create.html'
 
     def get(self, request, *args, **kwargs):
         form = self.form_class(initial=self.initial)

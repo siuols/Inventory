@@ -1,5 +1,5 @@
 from django import forms
-from .models import Item
+from .models import Brand,Category,Course,Customer,Release,Item
 from django.contrib.auth import get_user_model
 from django.core.validators import RegexValidator
 from django.utils.translation import ugettext, ugettext_lazy as _
@@ -18,6 +18,51 @@ class ItemForm(forms.ModelForm):
 			'quantity',               
 			'unit_cost',   
         ]
+
+class BrandForm(forms.Form):
+	class Meta:
+		model = Brand
+		fields = [
+			'name'
+		]
+
+class CategoryForm(forms.Form):
+	class Meta:
+		model = Category
+		fields = [
+			'name'
+		]
+
+class CourseForm(forms.Form):
+    class Meta:
+        model = Course
+        fields = [
+            'code'
+        ]
+
+class CustomerForm(forms.Form):
+	class Meta:
+		model = Customer
+		fields = [
+			'id_number',
+			'last_name',
+			'first_name',
+			'middle_name',
+			'course',
+			'year',
+			'status'
+		]
+
+class ReleaseForm(forms.Form):
+	class Meta:
+		model = Release
+		fields = [
+			'id_number',
+			'number',
+			'quantity',
+            'total',
+			'office'
+		]
 
 class RegistrationForm(forms.ModelForm):
     password1 = forms.CharField(label='Password', min_length=8, widget=forms.PasswordInput, validators=[RegexValidator('^[-a-zA-Z0-9_]+$', message="Password should be a combination of Alphabets and Numbers")])

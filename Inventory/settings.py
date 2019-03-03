@@ -25,7 +25,7 @@ SECRET_KEY = 'p(hp6)tvl-ooshm26_z_u#&bvdqdjbx$xkagmj1+a*r3=qkmi*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -52,7 +52,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'Inventory.urls'
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/stock'
 
 TEMPLATES = [
     {

@@ -23,8 +23,8 @@ from stock.views import RegisterFormView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('stock.urls', namespace='stock')),
-    path('login/', LoginView.as_view(), name='login'),
+    path('stock/', include('stock.urls', namespace='stock')),
+    path('', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(next_page=reverse_lazy('login')), name='logout'),
     path('register/', RegisterFormView.as_view(), name='register')
 ]
