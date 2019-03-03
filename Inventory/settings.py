@@ -53,6 +53,8 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'Inventory.urls'
 
 LOGIN_REDIRECT_URL = '/stock'
+LOGIN_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 TEMPLATES = [
     {

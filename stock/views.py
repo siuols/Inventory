@@ -1,13 +1,17 @@
-from django.shortcuts import redirect, render, get_object_or_404
-from django.views import View
-from .forms import ItemForm,RegistrationForm
-from barcode.writer import ImageWriter
-from .models import Item
 import barcode
 import os,sys
+from .forms import ItemForm,RegistrationForm
+from .models import Item
+from barcode.writer import ImageWriter
+from django.shortcuts import redirect, render, get_object_or_404
+from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import login, authenticate
+
+
 # Create your views here.
 
-class Home(View):
+class Home(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         post = Item.objects.all()
         context = {
@@ -57,7 +61,7 @@ class Releaselist(View):
         return render(request, 'stock/release_list.html', context)
 
 
-class ItemCreateView(View):
+class ItemCreateView(LoginRequiredMixin, View):
     form_class = ItemForm
     initial = {'key': 'value'}
     template_name = 'stock/item-create.html'
@@ -88,32 +92,27 @@ class ItemCreateView(View):
         }
         return render(request, self.template_name, context)
 
-class RegisterFormView(View):
+class RegisterFormView(LoginRequiredMixin, View):
     form_class = RegistrationForm
     initial = {'key': 'value'}
     template_name = 'registration/register.html'
 
     def get(self, request, *args, **kwargs):
         user_form = self.form_class(initial=self.initial)
-        profile_form = self.second_form_class(initial=self.initial)
         context = {
-            'user_form': user_form,
+            'user_form': user_form
         }
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
         user_form = self.form_class(request.POST)
-        profile_form = self.second_form_class(request.POST, request.FILES)
-        if user_form.is_valid() and profile_form.is_valid():
+        if user_form.is_valid():
             user_form.save()
             username = user_form.cleaned_data.get('username')
             raw_password = user_form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            profile_form = profile_form.save(commit=False)
-            profile_form.user = request.user
-            profile_form.save()
-            # return redirect('blog:post-list')
+            return redirect('stock:post-list')
         else:
             form = RegistrationForm()
         context = {
