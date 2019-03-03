@@ -1,6 +1,6 @@
 from django.urls import path
 
-from stock.views import ItemCreateView,Home
+from .views import ItemCreateView,Home
 
 app_name='stock'
 
