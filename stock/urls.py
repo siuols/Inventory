@@ -14,9 +14,6 @@ from .views import (
         ReleaseCreateView,
     )
 
-
-
-
 app_name='stock'
 
 urlpatterns = [
