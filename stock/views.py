@@ -1,7 +1,16 @@
 import barcode
 import os,sys
-from .forms import BrandForm,CategoryForm,CourseForm,CustomerForm,ItemForm,OfficeForm,RegistrationForm
-from .models import Item,Customer
+from .forms import (
+        BrandForm,
+        CategoryForm,
+        CourseForm,
+        CustomerForm,
+        ItemForm,
+        OfficeForm,
+        ReleaseForm,
+        RegistrationForm
+    )
+from .models import Item,Customer,Release
 from barcode.writer import ImageWriter
 from django.shortcuts import redirect, render, get_object_or_404
 from django.views import View
@@ -171,6 +180,43 @@ class CourseCreateView(LoginRequiredMixin, View):
             return redirect('stock:post-list')
         else:
             form = CourseForm()
+        context = {
+            'form': form
+        }
+        return render(request, self.template_name, context)
+
+class ReleaseCreateView(LoginRequiredMixin, View):
+    form_class = ReleaseForm
+    initial = {'key': 'value'}
+    template_name = 'stock/release-create.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(initial=self.initial)
+        context = {
+            'form': form,
+        }
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            number = post.number
+            item = Item.objects.filter(number=number)
+            release_quantity = post.quantity
+            quantity = item[0].quantity
+            unit_cost = item[0].unit_cost
+            item_quantity = quantity - release_quantity
+            quant = post.quantity * unit_cost
+            post.total = quant
+            q = Item.objects.get(number=number)
+            q.quantity = item_quantity
+            q.save()
+            post.user = request.user
+            post.save()
+            return redirect('stock:post-list')
+        else:
+            form = ReleaseForm()
         context = {
             'form': form
         }

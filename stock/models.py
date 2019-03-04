@@ -31,9 +31,9 @@ class Brand(models.Model):
     def __str__(self):
         return '{}'.format(self.name)
 
-    # @property
-    # def slug_title(self):
-    #     return '{}'.format(self.brand_name)
+    @property
+    def slug_title(self):
+        return '{}'.format(self.brand_name)
 
 class Category(models.Model):
     user                    = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -105,7 +105,7 @@ class Office(models.Model):
     slug                    = models.SlugField(null=True, blank=True)
 
     def __str__(self):
-        return '{}'.format(self.number)
+        return '{}'.format(self.name)
 
 class Release(models.Model):
     user                    = models.ForeignKey(User, on_delete=models.CASCADE)

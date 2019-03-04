@@ -67,7 +67,6 @@ class ReleaseForm(forms.ModelForm):
 			'id_number',
 			'number',
 			'quantity',
-            'total',
 			'office'
 		]
 
