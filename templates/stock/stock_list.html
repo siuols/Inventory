@@ -13,18 +13,7 @@
     }
   </style>
 </head>
-
 <body id="page-top">
-
-
-<!--   <h2>Greetings</h2>
-  <div class="container">
-    <div class="inner">Hello</div>
-
-    <input type="search" class="form-control form-control-sm aaa" placeholder="" aria-controls="dataTable">
-  </div> -->
-
-
     <!-- Sidebar -->
     <div id="content-wrapper">
       <div class="alignment-scanner" id="scanner">
@@ -96,8 +85,6 @@
     <i class="fas fa-angle-up"></i>
   </a>
   <script type="text/javascript">
-    // $(".aaa").append("a");
-
     var sound = new Audio("barcode.wav");
     $(document).ready(function() {
       barcode.config.start = 0.1;
@@ -106,8 +93,9 @@
       barcode.config.canvas = '#barcodecanvas';
       barcode.config.canvasg = '#barcodecanvasg';
       barcode.setHandler(function(barcode) {
-        // $(".inner").append(barcode);
-        $('#result').html(barcode);
+        $('.result').html(barcode);
+        $(".form-control-sm").focus();
+        $('.form-control-sm').val(barcode);
       });
       barcode.init();
       $('#result').bind('DOMSubtreeModified', function(e) {

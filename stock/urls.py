@@ -14,7 +14,9 @@ from .views import (
         OfficeCreateView,
         ItemDetailView,
         ReleaseCreateView,
-        item_edit
+        item_edit,
+        Pdf,
+        PdfRelease,        
     )
 
 app_name='stock'
@@ -22,10 +24,9 @@ app_name='stock'
 urlpatterns = [
     path('', Home.as_view(), name='post-list'),
     path('customer/', CustomerList.as_view(), name='customer-list'),
-    path('customer/<str:id_number>', CustomerDetailView.as_view(), name='customer-detail'),
-    path('item/<str:number>', ItemDetailView.as_view(), name='item-detail'),
-
-    path('item/<str:number>/edit/', views.item_edit),
+    path('customer/<str:id_number>/', CustomerDetailView.as_view(), name='customer-detail'),
+    path('item/<str:number>/', views.item_edit, name='item-edit'),
+    path('item/detail/<str:number>/', ItemDetailView.as_view(), name='item-detail'),
 
     path('create/', ItemCreateView.as_view(), name='post-create'),
     path('create-brand/', BrandCreateView.as_view(), name='brand-create'),
@@ -34,4 +35,6 @@ urlpatterns = [
     path('create-course/', CourseCreateView.as_view(), name='course-create'),
     path('create-customer/', CustomerCreateView.as_view(), name='course-customer'),
     path('release/', ReleaseCreateView.as_view(), name='release'),
+    path('report/', Pdf.as_view(), name='pdf'),
+    path('report/release', PdfRelease.as_view(), name='pdf-release'),
 ]

@@ -118,4 +118,4 @@ class Release(models.Model):
     date_modified           = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return '{}'.format(self.number)
+        return '{}'.format(self.number)    

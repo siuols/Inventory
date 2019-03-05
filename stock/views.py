@@ -16,6 +16,10 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, authenticate
+from django.utils import timezone
+from .models import *
+from .render import Render
+from django.db.models import Sum
 
 
 # Create your views here.
@@ -83,16 +87,20 @@ class ItemCreateView(LoginRequiredMixin, View):
         }
         return render(request, self.template_name, context)
 
-def item_edit(request, number):
-    post_item = Item.objects.filter(user=request.user)
-    post = get_object_or_404(post_item, number=number)
+def item_edit(request,number):
+    post_item = Item.objects.all()
+    post = get_object_or_404(Item, number=number)
     if request.method == "POST":
         form = ItemForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             post = form.save(commit=False)
+            quantity = post.quantity
+            unit_cost = post.unit_cost
+            total_value = quantity * unit_cost
+            post.total = total_value
             post.user = request.user
             post.save()
-            return redirect('stock:item-detail', number=post.number)
+            return redirect('stock:item-detail', number=number)
     else:
         form = ItemForm(instance=post)
     context = {
@@ -102,7 +110,7 @@ def item_edit(request, number):
 
 class ItemDetailView(View):
     def get(self, request, number, *args, **kwargs):
-        item_detail = get_object_or_404(Item, number = number)
+        item_detail = get_object_or_404(Item, number=number)
         context = {
             'item_detail': item_detail
         }
@@ -289,3 +297,27 @@ class RegisterFormView(LoginRequiredMixin, View):
             'user_form': user_form,
         }
         return render(request, self.template_name, context)
+
+class Pdf(View):
+    def get(self, request):
+        item = Item.objects.all()
+        today = timezone.now()
+        user  = request.user
+        params = {
+            'today': today,
+            'user':user,
+            'item': item,   
+        }
+        return Render.render('report/pdf.html', params)
+
+class PdfRelease(View):
+    def get(self, request):
+        item = Release.objects.all()
+        today = timezone.now()
+        user  = request.user
+        params = {
+            'today': today,
+            'user':user,
+            'item': item,   
+        }
+        return Render.render('report/pdf-release.html', params)

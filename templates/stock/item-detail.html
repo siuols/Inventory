@@ -6,10 +6,7 @@
 
 {% block content %}
   <div class="container">
-    <a href='{% url "stock:item-edit" post.number %}'>aa</a>
-
-
-
+ <a href="{% url 'stock:item-edit' item_detail.number %}">Update</a>
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">{{ item_detail.name }}</div>
       <div class="card-body">
