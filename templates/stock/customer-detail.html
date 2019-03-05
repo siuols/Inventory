@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block head_title %}{{ customer_detail.id_number }} | {{ block.super }}{% endblock head_title %}
+{% load staticfiles %}
+{% block content %}
+  <div class="container">
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header">{{ customer_detail.id_number }}</div>
+      <div class="card-body">
+        <form method="post" enctype="multipart/form-data" >
+          <div class="form-group">
+            <div class="form-label-group">
+              <p>Last name : {{ customer_detail.last_name }}</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-label-group">
+              <p>First name : {{ customer_detail.first_name }}</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-label-group">
+              <p>Middle name : {{ customer_detail.middle_name }}</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-label-group">
+              <p>Course : {{ customer_detail.course }}</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-label-group">
+              <p>Year : {{ customer_detail.year }}</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-label-group">
+              <p>Status: {{ customer_detail.status }}</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-label-group">
+              <p>Date registered: {{ customer_detail.date_created }}</p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
