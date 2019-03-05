@@ -26,7 +26,6 @@ class Brand(models.Model):
     name                    = models.CharField(max_length=255)
     date_created            = models.DateTimeField(auto_now_add=True)
     date_modified           = models.DateTimeField(auto_now=True)
-    slug                    = models.SlugField(null=True, blank=True)
 
     def __str__(self):
         return '{}'.format(self.name)
@@ -40,7 +39,6 @@ class Category(models.Model):
     name                    = models.CharField(max_length=255)
     date_created            = models.DateTimeField(auto_now_add=True)
     date_modified           = models.DateTimeField(auto_now=True)
-    slug                    = models.SlugField(null=True, blank=True)
 
     def __str__(self):
         return '{}'.format(self.name)
@@ -58,7 +56,6 @@ class Item(models.Model):
     total                   = models.IntegerField()
     date_created            = models.DateTimeField(auto_now_add=True)
     date_modified           = models.DateTimeField(auto_now=True)
-    slug                    = models.SlugField(null=True, blank=True)
 
     def __str__(self):
         return '{}'.format(self.number)
@@ -68,7 +65,6 @@ class Course(models.Model):
     code                    = models.CharField(max_length=255)
     date_created            = models.DateTimeField(auto_now_add=True)
     date_modified           = models.DateTimeField(auto_now=True)
-    slug                    = models.SlugField(null=True, blank=True)
 
     def __str__(self):
         return '{}'.format(self.code)
@@ -92,7 +88,6 @@ class Customer(models.Model):
                                             )
     date_created            = models.DateTimeField(auto_now_add=True)
     date_modified           = models.DateTimeField(auto_now=True)
-    slug                    = models.SlugField(null=True, blank=True)
 
     def __str__(self):
         return '{}'.format(self.id_number)
@@ -102,7 +97,6 @@ class Office(models.Model):
     name                    = models.CharField(max_length=255)
     date_created            = models.DateTimeField(auto_now_add=True)
     date_modified           = models.DateTimeField(auto_now=True)
-    slug                    = models.SlugField(null=True, blank=True)
 
     def __str__(self):
         return '{}'.format(self.name)
