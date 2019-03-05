@@ -83,6 +83,23 @@ class ItemCreateView(LoginRequiredMixin, View):
         }
         return render(request, self.template_name, context)
 
+def item_edit(request, number):
+    post_item = Item.objects.filter(user=request.user)
+    post = get_object_or_404(post_item, number=number)
+    if request.method == "POST":
+        form = ItemForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+            return redirect('stock:item-detail', number=post.number)
+    else:
+        form = ItemForm(instance=post)
+    context = {
+        'form': form,
+    }
+    return render(request, 'stock/item-edit.html', context)
+
 class ItemDetailView(View):
     def get(self, request, number, *args, **kwargs):
         item_detail = get_object_or_404(Item, number = number)
