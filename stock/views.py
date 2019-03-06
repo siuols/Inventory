@@ -230,10 +230,13 @@ class ReleaseCreateView(LoginRequiredMixin, View):
             release_quantity = post.quantity
             quantity = item[0].quantity
             unit_cost = item[0].unit_cost
+            total_amount = item[0].total
             item_quantity = quantity - release_quantity
             quant = post.quantity * unit_cost
+            total_amount = total_amount - quant
             post.total = quant
             q = Item.objects.get(number=number)
+            q.total = total_amount
             q.quantity = item_quantity
             q.save()
             post.user = request.user
