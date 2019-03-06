@@ -7,6 +7,11 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, authenticate
+from django.utils import timezone
+from .models import *
+from .render import Render
+
+
 
 
 # Create your views here.
@@ -226,3 +231,32 @@ class RegisterFormView(LoginRequiredMixin, View):
             'user_form': user_form,
         }
         return render(request, self.template_name, context)
+
+
+       # Report 
+
+class Pdf(View):
+
+    def get(self, request):
+        item = Item.objects.all()
+        today = timezone.now()
+        user  = request.user
+        params = {
+            'today': today,
+            'user':user,
+            'item': item,
+             
+        }
+        return Render.render('report/pdf.html', params)
+
+class PdfDetail(View):
+
+    def get(self,pk, request):
+        item = get_object_or_404(Item, pk=pk)
+        today = timezone.now()
+        params = {
+            'today': today,
+            'item': item,
+            'request': request
+        }
+        return Render.render('reports/pdf.html', params)
