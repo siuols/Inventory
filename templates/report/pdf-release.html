@@ -32,13 +32,8 @@
         <thead>
           <tr>
             <th>Number</th>
-            <th>name</th>
-            <th>description</th>
-            <th>brand</th>
-            <th>category</th>
             <th>quantity</th>
             <th>unit_cost</th>
-            <th>total</th>
             <hr></hr>
           </tr>
         </thead>
@@ -47,12 +42,7 @@
           {% for item in item %}
             <tr>
               <td>{{ item.number }}</td>
-              <td>{{ item.name }}</td>
-              <td>{{ item.description}}</td>
-              <td>{{ item.brand }}</td>
-              <td>{{ item.category }}</td>
               <td>{{ item.quantity }}</td>
-              <td>{{ item.unit_cost }}</td>
               <td>{{ item.total }}</td>
             </tr>
           {% endfor %}

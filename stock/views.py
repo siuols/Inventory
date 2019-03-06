@@ -312,11 +312,13 @@ class Pdf(View):
 class PdfRelease(View):
     def get(self, request):
         item = Release.objects.all()
+        item2 = Item.objects.all()
         today = timezone.now()
         user  = request.user
         params = {
             'today': today,
             'user':user,
             'item': item,   
+            'item2': item2
         }
         return Render.render('report/pdf-release.html', params)
