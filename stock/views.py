@@ -19,7 +19,6 @@ from django.contrib.auth import login, authenticate
 from django.utils import timezone
 from .models import *
 from .render import Render
-from django.db.models import Sum
 
 
 # Create your views here.
