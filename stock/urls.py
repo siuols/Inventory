@@ -17,7 +17,8 @@ from .views import (
         RecieveCreateView,
         item_edit,
         Pdf,
-        PdfRelease,        
+        PdfRelease,       
+        PdfRecieve,
     )
 
 app_name='stock'
@@ -38,5 +39,6 @@ urlpatterns = [
     path('create-customer/', CustomerCreateView.as_view(), name='course-customer'),
     path('release/', ReleaseCreateView.as_view(), name='release'),
     path('report/', Pdf.as_view(), name='pdf'),
+    path('report/recieve', PdfRecieve.as_view(), name='pdf-recieve'),
     path('report/release', PdfRelease.as_view(), name='pdf-release'),
 ]

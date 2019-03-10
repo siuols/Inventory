@@ -1,0 +1,61 @@
+{% load static from staticfiles %}
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Report</title>
+ <style type="text/css">
+  .pdf td{
+    font-size: 1em;
+    margin-left: 36px;
+    margin-top: 20px;
+  }
+  .table{
+    margin-bottom: 10px;
+  }
+  .table th{
+    margin-left: -10px;
+    font-size: 1.5em;
+  }
+ </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        <h3>Print Report - {{ today | date:"Y/m/d" }}</h3>
+      </div>
+      <div class="list-group">   
+        <strong><p>Recieved Items</u></p></strong>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Number</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Unit Cost</th>
+            <th>Total</th>
+            <hr></hr>
+          </tr>
+        </thead>
+        <tbody class="pdf">
+          <hr></hr> 
+          {% for item in item %}
+            <tr>
+              <td>{{ item.number }}</td>
+              <td>{{ item.number.name }}</td>
+              <td>{{ item.number.description }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>{{ item.unit_cost }}</td>
+              <td>{{ item.total }}</td>
+              <td>{{ item.date_created }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

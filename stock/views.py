@@ -11,7 +11,7 @@ from .forms import (
         RecieveForm,
         RegistrationForm
     )
-from .models import Item,Customer,Release
+from .models import Item,Customer,Release,Recieve
 from barcode.writer import ImageWriter
 from django.shortcuts import redirect, render, get_object_or_404
 from django.views import View
@@ -349,6 +349,18 @@ class Pdf(View):
             'item': item,   
         }
         return Render.render('report/pdf.html', params)
+
+class PdfRecieve(View):
+    def get(self, request):
+        item = Recieve.objects.all()
+        today = timezone.now()
+        user  = request.user
+        params = {
+            'today': today,
+            'user':user,
+            'item': item,   
+        }
+        return Render.render('report/pdf-recieve.html', params)
 
 class PdfRelease(View):
     def get(self, request):
