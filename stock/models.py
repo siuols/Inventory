@@ -111,3 +111,15 @@ class Release(models.Model):
 
     def __str__(self):
         return '{}'.format(self.number)    
+
+class Recieved(models.Model):
+    user                    = models.ForeignKey(User, on_delete=models.CASCADE)
+    number                  = models.ForeignKey('Item', on_delete=models.CASCADE)
+    quantity                = models.IntegerField()
+    unit_cost               = models.IntegerField()
+    total                   = models.IntegerField()
+    date_created            = models.DateTimeField(auto_now_add=True)
+    date_modified           = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '{}'.format(self.number)

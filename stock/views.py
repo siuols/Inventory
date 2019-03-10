@@ -20,7 +20,6 @@ from django.utils import timezone
 from .models import *
 from .render import Render
 
-
 # Create your views here.
 
 class Home(LoginRequiredMixin, View):
@@ -137,8 +136,6 @@ class BrandCreateView(LoginRequiredMixin, View):
             'form': form
         }
         return render(request, self.template_name, context)
-
-        OfficeForm
 
 class CategoryCreateView(LoginRequiredMixin, View):
     form_class = CategoryForm
