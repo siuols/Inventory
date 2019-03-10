@@ -112,7 +112,7 @@ class Release(models.Model):
     def __str__(self):
         return '{}'.format(self.number)    
 
-class Recieved(models.Model):
+class Recieve(models.Model):
     user                    = models.ForeignKey(User, on_delete=models.CASCADE)
     number                  = models.ForeignKey('Item', on_delete=models.CASCADE)
     quantity                = models.IntegerField()

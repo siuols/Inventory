@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="container">
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header">Add Item</div>
+      <div class="card-body">
+        <form method="POST" class="post-form" role="form">{% csrf_token %}
+          <div class="form-group">
+            <div class="form-group item">
+              <label>Code</label>
+                {{ form.number }}
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-label-group">
+              <input type="number" name="quantity" maxlength="255" id="id_quantity" class="form-control" placeholder="Quantity" required="required">
+              <label for="id_quantity">Quantity</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-label-group">
+              <input type="number" name="unit_cost" maxlength="255" id="id_unit_cost" class="form-control" placeholder="Unit Cost" required="required">
+              <label for="id_unit_cost">Unit Cost</label>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Save</button>
+          <button type="reset" class="bbtn btn-primary btn-block">Reset Button</button>  
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

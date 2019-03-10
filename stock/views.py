@@ -8,6 +8,7 @@ from .forms import (
         ItemForm,
         OfficeForm,
         ReleaseForm,
+        RecieveForm,
         RegistrationForm
     )
 from .models import Item,Customer,Release
@@ -241,6 +242,46 @@ class ReleaseCreateView(LoginRequiredMixin, View):
             return redirect('stock:post-list')
         else:
             form = ReleaseForm()
+        context = {
+            'form': form
+        }
+        return render(request, self.template_name, context)
+
+class RecieveCreateView(LoginRequiredMixin, View):
+    form_class = RecieveForm
+    initial = {'key': 'value'}
+    template_name = 'stock/recieve-create.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(initial=self.initial)
+        context = {
+            'form': form,
+        }
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            number = post.number
+            item = Item.objects.filter(number=number)
+            release_quantity = post.quantity
+            quantity = item[0].quantity
+            unit_cost = item[0].unit_cost
+            total_amount = item[0].total
+            item_quantity = quantity + release_quantity
+            quant = post.quantity * unit_cost
+            total_amount = total_amount + quant
+            post.total = quant
+            q = Item.objects.get(number=number)
+            q.total = total_amount
+            q.quantity = item_quantity
+            q.save()
+            post.user = request.user
+            post.save()
+            return redirect('stock:post-list')
+        else:
+            form = RecieveForm()
         context = {
             'form': form
         }

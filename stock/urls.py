@@ -14,6 +14,7 @@ from .views import (
         OfficeCreateView,
         ItemDetailView,
         ReleaseCreateView,
+        RecieveCreateView,
         item_edit,
         Pdf,
         PdfRelease,        
@@ -28,6 +29,7 @@ urlpatterns = [
     path('item/<str:number>/', views.item_edit, name='item-edit'),
     path('item/detail/<str:number>/', ItemDetailView.as_view(), name='item-detail'),
 
+    path('recieve/', RecieveCreateView.as_view(), name='recieve-create'),
     path('create/', ItemCreateView.as_view(), name='post-create'),
     path('create-brand/', BrandCreateView.as_view(), name='brand-create'),
     path('create-category/', CategoryCreateView.as_view(), name='category-create'),

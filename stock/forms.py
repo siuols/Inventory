@@ -1,5 +1,5 @@
 from django import forms
-from .models import Brand,Category,Course,Customer,Release,Office,Item
+from .models import Brand,Category,Course,Customer,Release,Recieve,Office,Item
 from django.contrib.auth import get_user_model
 from django.core.validators import RegexValidator
 from django.utils.translation import ugettext, ugettext_lazy as _
@@ -17,6 +17,15 @@ class ItemForm(forms.ModelForm):
 			'description',             
 			'quantity',               
 			'unit_cost',   
+        ]
+
+class RecieveForm(forms.ModelForm):
+    class Meta:
+        model = Recieve
+        fields = [
+            'number',                  
+            'quantity',               
+            'unit_cost',   
         ]
 
 class BrandForm(forms.ModelForm):
