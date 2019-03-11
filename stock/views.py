@@ -20,6 +20,7 @@ from django.contrib.auth import login, authenticate
 from django.utils import timezone
 from .models import *
 from .render import Render
+from datetime import datetime, timedelta
 
 # Create your views here.
 
@@ -365,13 +366,87 @@ class PdfRecieve(View):
 class PdfRelease(View):
     def get(self, request):
         item = Release.objects.all()
-        item2 = Item.objects.all()
         today = timezone.now()
         user  = request.user
         params = {
             'today': today,
             'user':user,
-            'item': item,   
-            'item2': item2
+            'item': item
         }
         return Render.render('report/pdf-release.html', params)
+
+class PdfReleaseDaily(View):
+    def get(self, request, *args, **kwargs):
+        today = datetime.today()
+        item = Release.objects.filter(date_created__year=today.year, date_created__month=today.month, date_created__day=today.day)
+        user  = request.user
+        params = {
+            'today': today,
+            'user':user,
+            'item': item,
+        }
+        return Render.render('report/pdf-release-daily.html', params)
+
+class PdfReleaseWeekly(View):
+    def get(self, request, *args, **kwargs):
+        today = datetime.today()
+        d=today-timedelta(days=7)
+        item = Release.objects.filter(date_created__gte=d)
+        user  = request.user
+        params = {
+            'today': today,
+            'user':user,
+            'item': item,
+        }
+        return Render.render('report/pdf-release-daily.html', params)
+
+class PdfReleaseMonthly(View):
+    def get(self, request, *args, **kwargs):
+        today = datetime.today()
+        d=today-timedelta(days=30)
+        item = Release.objects.filter(date_created__gte=d)
+        user  = request.user
+        params = {
+            'today': today,
+            'user':user,
+            'item': item,
+        }
+        return Render.render('report/pdf-release-monthly.html', params)
+
+class PdfReceiveDaily(View):
+    def get(self, request, *args, **kwargs):
+        today = datetime.today()
+        item = Recieve.objects.filter(date_created__year=today.year, date_created__month=today.month, date_created__day=today.day)
+        user  = request.user
+        params = {
+            'today': today,
+            'user':user,
+            'item': item,
+        }
+        return Render.render('report/pdf-Receive-daily.html', params)
+
+class PdfReceiveWeekly(View):
+    def get(self, request, *args, **kwargs):
+        today = datetime.today()
+        d=today-timedelta(days=7)
+        item = Recieve.objects.filter(date_created__gte=d)
+        user  = request.user
+        params = {
+            'today': today,
+            'user':user,
+            'item': item,
+        }
+        return Render.render('report/pdf-Receive-weekly.html', params)
+
+class PdfReceiveMonthly(View):
+    def get(self, request, *args, **kwargs):
+        today = datetime.today()
+        d=today-timedelta(days=30)
+        item = Recieve.objects.filter(date_created__gte=d)
+        user  = request.user
+        params = {
+            'today': today,
+            'user':user,
+            'item': item,
+        }
+        return Render.render('report/pdf-Receive-monthly.html', params)

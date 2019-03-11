@@ -16,7 +16,8 @@ class ItemForm(forms.ModelForm):
 			'name',                   
 			'description',             
 			'quantity',               
-			'unit_cost',   
+			'unit_cost',
+            'item_status'
         ]
 
 class RecieveForm(forms.ModelForm):

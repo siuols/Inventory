@@ -7,7 +7,7 @@
  <style type="text/css">
   .pdf td{
     font-size: 1em;
-    margin-left: 36px;
+    margin-left: 16px;
     margin-top: 20px;
   }
   .table{
@@ -26,14 +26,15 @@
         <h3>Print Report - {{ today | date:"Y/m/d" }}</h3>
       </div>
       <div class="list-group">   
-        <strong><p>Recieved Items</u></p></strong>
+        <strong><p>Daily Receive</u></p></strong>
       </div>
       <table class="table">
         <thead>
           <tr>
-            <th>Number</th>
-            <th>Name</th>
+            <th>Brand</th>
+            <th>Product Name</th>
             <th>Description</th>
+            <th>Category</th>
             <th>Quantity</th>
             <th>Unit Cost</th>
             <th>Total</th>
@@ -44,9 +45,10 @@
           <hr></hr> 
           {% for item in item %}
             <tr>
-              <td>{{ item.number }}</td>
+              <td>{{ item.number.brand }}</td>
               <td>{{ item.number.name }}</td>
               <td>{{ item.number.description }}</td>
+              <td>{{ item.number.category }}</td>
               <td>{{ item.quantity }}</td>
               <td>{{ item.unit_cost }}</td>
               <td>{{ item.total }}</td>

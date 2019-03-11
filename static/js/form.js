@@ -6,3 +6,4 @@ $(".category-list #id_category").addClass("form-control");
 $(".list-course #id_course").addClass("form-control");
 $(".year-list #id_year").addClass("form-control");
 $(".status-list #id_status").addClass("form-control");
+$(".item-status-list #id_item_status").addClass("form-control");

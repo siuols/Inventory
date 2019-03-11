@@ -34,6 +34,12 @@
             <textarea class="form-control" name="description" required id="id_description" rows="3"></textarea>
           </div>
           <div class="form-group">
+            <div class="form-group item-status-list">
+              <label>Item Status</label>
+               {{ form.item_status }}
+            </div>
+          </div>
+          <div class="form-group">
             <div class="form-label-group">
               <input type="number" name="quantity" maxlength="255" id="id_quantity" class="form-control" placeholder="Quantity" required="required">
               <label for="id_quantity">Quantity</label>

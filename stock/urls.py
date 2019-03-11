@@ -18,7 +18,15 @@ from .views import (
         item_edit,
         Pdf,
         PdfRelease,       
+        PdfReleaseDaily,
+        PdfReleaseWeekly,
+        PdfReleaseMonthly,
+
         PdfRecieve,
+        PdfReceiveDaily,
+        PdfReceiveWeekly,
+        PdfReceiveMonthly
+        
     )
 
 app_name='stock'
@@ -41,4 +49,12 @@ urlpatterns = [
     path('report/', Pdf.as_view(), name='pdf'),
     path('report/recieve', PdfRecieve.as_view(), name='pdf-recieve'),
     path('report/release', PdfRelease.as_view(), name='pdf-release'),
+
+    path('report/release-daily', PdfReleaseDaily.as_view(), name='pdf-release-daily'),
+    path('report/release-weekly', PdfReleaseWeekly.as_view(), name='pdf-release-weekly'),
+    path('report/release-monthly', PdfReleaseMonthly.as_view(), name='pdf-release-monthly'),
+
+    path('report/receive-daily', PdfReceiveDaily.as_view(), name='pdf-receive-daily'),
+    path('report/receive-weekly', PdfReceiveWeekly.as_view(), name='pdf-receive-weekly'),
+    path('report/receive-monthly', PdfReceiveMonthly.as_view(), name='pdf-receive-monthly'),
 ]

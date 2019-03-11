@@ -18,3 +18,5 @@ print ("Day of week: ", datetime.date.today().strftime("%A"))
 print(datetime.date.today().strftime("%B %d"))
 
 print (datetime.date.today().strftime("%d"))
+
+print (datetime.datetime.now().strftime("%y-%m-%d"))

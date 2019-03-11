@@ -13,10 +13,13 @@ YEAR_CHOICES = (
 )
 
 STATUS_CHOICES = (
-    ('Single', 'Single'),
-    ('Married', 'Married'),
-    ('Separeted', 'Separeted'),
-    ('Widow', 'Widow'),
+    ('Student', 'Student'),
+    ('Faculty', 'Faculty'),
+)
+
+ITEM_STATUS = (
+    ('Consumables', 'Consumables'),
+    ('Non-Consumables', 'Non-Consumables'),
 )
 
 class Brand(models.Model):
@@ -52,6 +55,10 @@ class Item(models.Model):
     quantity                = models.IntegerField()
     unit_cost               = models.IntegerField()
     total                   = models.IntegerField()
+    item_status             = models.CharField(
+                                                max_length=9,
+                                                choices=ITEM_STATUS,
+                                            )
     date_created            = models.DateTimeField(auto_now_add=True)
     date_modified           = models.DateTimeField(auto_now=True)
 
@@ -90,6 +97,10 @@ class Customer(models.Model):
     def __str__(self):
         return '{}'.format(self.id_number)
 
+    @property
+    def full_name(self):
+        return '{}, {} {}'.format(self.last_name, self.first_name, self.middle_name) 
+
 class Office(models.Model):
     user                    = models.ForeignKey(User, on_delete=models.CASCADE)
     name                    = models.CharField(max_length=255)
@@ -110,7 +121,7 @@ class Release(models.Model):
     date_modified           = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return '{}'.format(self.number)    
+        return '{}'.format(self.number)   
 
 class Recieve(models.Model):
     user                    = models.ForeignKey(User, on_delete=models.CASCADE)
