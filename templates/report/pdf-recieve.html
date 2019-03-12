@@ -37,6 +37,7 @@
             <th>Quantity</th>
             <th>Unit Cost</th>
             <th>Total</th>
+            <th>Item Status</th>
             <hr></hr>
           </tr>
         </thead>
@@ -50,6 +51,7 @@
               <td>{{ item.quantity }}</td>
               <td>{{ item.unit_cost }}</td>
               <td>{{ item.total }}</td>
+              <td>{{ item.number.item_status }}</td>
             </tr>
           {% endfor %}
         </tbody>

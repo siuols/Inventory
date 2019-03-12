@@ -56,7 +56,7 @@ class Item(models.Model):
     unit_cost               = models.IntegerField()
     total                   = models.IntegerField()
     item_status             = models.CharField(
-                                                max_length=9,
+                                                max_length=20,
                                                 choices=ITEM_STATUS,
                                             )
     date_created            = models.DateTimeField(auto_now_add=True)

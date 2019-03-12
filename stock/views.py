@@ -398,7 +398,7 @@ class PdfReleaseWeekly(View):
             'user':user,
             'item': item,
         }
-        return Render.render('report/pdf-release-daily.html', params)
+        return Render.render('report/pdf-release-weekly.html', params)
 
 class PdfReleaseMonthly(View):
     def get(self, request, *args, **kwargs):

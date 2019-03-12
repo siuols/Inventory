@@ -7,7 +7,7 @@
  <style type="text/css">
   .pdf td{
     font-size: 1em;
-    margin-left: 36px;
+    margin-left: 25px;
     margin-top: 20px;
   }
   .table{
@@ -34,6 +34,7 @@
             <th>Number</th>
             <th>Name</th>
             <th>Description</th>
+            <th>Item Status</th>
             <th>Quantity</th>
             <th>Unit Cost</th>
             <th>Total</th>
@@ -47,6 +48,7 @@
               <td>{{ item.number }}</td>
               <td>{{ item.number.name }}</td>
               <td>{{ item.number.description }}</td>
+              <td>{{ item.number.item_status }}</td>
               <td>{{ item.quantity }}</td>
               <td>{{ item.unit_cost }}</td>
               <td>{{ item.total }}</td>
